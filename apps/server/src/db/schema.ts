@@ -97,7 +97,7 @@ export const connection = createTable(
     accessToken: text('access_token'),
     refreshToken: text('refresh_token'),
     scope: text('scope').notNull(),
-    providerId: text('provider_id').$type<'google' | 'microsoft'>().notNull(),
+    providerId: text('provider_id').$type<'google' | 'microsoft' | 'dovecot'>().notNull(),
     expiresAt: timestamp('expires_at').notNull(),
     createdAt: timestamp('created_at').notNull(),
     updatedAt: timestamp('updated_at').notNull(),
@@ -171,4 +171,20 @@ export const jwks = createTable('jwks', {
   publicKey: text('public_key').notNull(),
   privateKey: text('private_key').notNull(),
   createdAt: timestamp('created_at').notNull(),
+});
+
+export const dovecotConnection = createTable('dovecot_connection', {
+  id: text('id').primaryKey(),
+  connectionId: text('connection_id')
+    .notNull()
+    .references(() => connection.id, { onDelete: 'cascade' }),
+  host: text('host').notNull(),
+  port: integer('port').notNull().default(143),
+  secure: boolean('secure').notNull().default(false),
+  protocol: text('protocol').$type<'imap' | 'pop3'>().notNull().default('imap'),
+  smtpHost: text('smtp_host'),
+  smtpPort: integer('smtp_port').default(587),
+  smtpSecure: boolean('smtp_secure').default(false),
+  createdAt: timestamp('created_at').notNull(),
+  updatedAt: timestamp('updated_at').notNull(),
 });

@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  dovecot:
+    container_name: zerodotemail-dovecot
+    image: dovecot/dovecot:latest
+    restart: unless-stopped
+    ports:
+      - "143:143"    # IMAP
+      - "993:993"    # IMAPS (SSL)
+      - "110:110"    # POP3
+      - "995:995"    # POP3S (SSL)
+      - "587:587"    # SMTP submission
+      - "25:25"      # SMTP
+    volumes:
+      - ./config:/etc/dovecot
+      - ./mail:/var/mail
+      - ./ssl:/etc/ssl/dovecot
+      - dovecot-data:/var/lib/dovecot
+    environment:
+      - DOVECOT_HOSTNAME=localhost
+      - DOVECOT_DOMAIN=localhost
+    networks:
+      - dovecot-network
+
+  # Optional: Postfix for SMTP sending (if needed)
+  postfix:
+    container_name: zerodotemail-postfix
+    image: catatnight/postfix:latest
+    restart: unless-stopped
+    ports:
+      - "2525:25"  # Changed to avoid conflict with host port 25
+    environment:
+      - maildomain=localhost
+      - smtp_user=testuser:testpass
+    volumes:
+      - postfix-data:/var/spool/postfix
+    networks:
+      - dovecot-network
+
+volumes:
+  dovecot-data:
+  postfix-data:
+
+networks:
+  dovecot-network:
+    driver: bridge

@@ -22,7 +22,7 @@ Most email services today are either **closed-source**, **data-hungry**, or **to
 - 🦾 **AI Driven** - Enhance your emails with Agents & LLMs.
 - 🔒 **Data Privacy First** – Your emails, your data. Zero does not track, collect, or sell your data in any way. Please note: while we integrate with external services, the data passed through them is not under our control and falls under their respective privacy policies and terms of service.
 - ⚙️ **Self-Hosting Freedom** – Run your own email app with ease.
-- 📬 **Unified Inbox** – Connect multiple email providers like Gmail, Outlook, and more.
+- 📬 **Unified Inbox** – Connect multiple email providers like Gmail, Outlook, Dovecot IMAP/POP3, and more.
 - 🎨 **Customizable UI & Features** – Tailor your email experience the way you want it.
 - 🚀 **Developer-Friendly** – Built with extensibility and integrations in mind.
 
@@ -237,6 +237,37 @@ Zero uses PostgreSQL for storing data. Here's how to set it up:
      pnpm db:studio
      ```
      > If you run `pnpm dev` in your terminal, the studio command should be automatically running with the app.
+
+## Dovecot IMAP/POP3 Integration
+
+Zero Email now supports connecting to Dovecot IMAP/POP3 servers, enabling integration with self-hosted email servers and web hosting providers.
+
+### Quick Start with Local Dovecot
+
+1. **Start Local Dovecot Server**:
+   ```bash
+   pnpm dovecot:up
+   ```
+
+2. **Test the Integration**:
+   ```bash
+   pnpm dovecot:test
+   ```
+
+3. **Available Test Accounts**:
+   - `testuser@localhost:testpass`
+   - `alice@localhost:alicepass`
+   - `bob@localhost:bobpass`
+
+### Features
+
+- ✅ IMAP/POP3 email retrieval
+- ✅ SMTP email sending
+- ✅ Local development setup
+- ✅ Production-ready configuration
+- ✅ Support for web hosting providers
+
+For detailed setup and configuration, see [DOVECOT_INTEGRATION.md](./DOVECOT_INTEGRATION.md).
 
 ## Contribute
 

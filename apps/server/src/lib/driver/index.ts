@@ -1,10 +1,12 @@
 import type { MailManager, ManagerConfig } from './types';
 import { OutlookMailManager } from './microsoft';
 import { GoogleMailManager } from './google';
+import { DovecotMailManager } from './dovecot';
 
 const supportedProviders = {
   google: GoogleMailManager,
   microsoft: OutlookMailManager,
+  dovecot: DovecotMailManager,
 };
 
 export const createDriver = (

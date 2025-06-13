@@ -28,7 +28,13 @@
     "db:push": "dotenv -- pnpm run -C apps/server db:push",
     "db:studio": "dotenv -- pnpm run -C apps/server db:studio",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org zero-7y --project nextjs ./apps/mail/.next && sentry-cli sourcemaps upload --org zero-7y --project nextjs ./apps/mail/.next",
-    "scripts": "dotenv -- pnpx tsx ./scripts/run.ts"
+    "scripts": "dotenv -- pnpx tsx ./scripts/run.ts",
+    "dovecot:setup": "cd dovecot && ./scripts/setup.sh",
+    "dovecot:up": "cd dovecot && docker-compose up -d",
+    "dovecot:down": "cd dovecot && docker-compose down",
+    "dovecot:logs": "cd dovecot && docker-compose logs -f dovecot",
+    "dovecot:test": "dotenv -- pnpx tsx ./scripts/test-dovecot.ts",
+    "dovecot:status": "dotenv -- pnpx tsx ./scripts/test-dovecot.ts --status"
   },
   "devDependencies": {
     "@types/node": "22.15.29",

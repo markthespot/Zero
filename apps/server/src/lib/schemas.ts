@@ -59,3 +59,17 @@ export const userSettingsSchema = z.object({
 });
 
 export type UserSettings = z.infer<typeof userSettingsSchema>;
+
+export const dovecotConfigSchema = z.object({
+  host: z.string().min(1, 'Host is required'),
+  port: z.number().int().min(1).max(65535).default(143),
+  secure: z.boolean().default(false),
+  protocol: z.enum(['imap', 'pop3']).default('imap'),
+  smtpHost: z.string().optional(),
+  smtpPort: z.number().int().min(1).max(65535).default(587).optional(),
+  smtpSecure: z.boolean().default(false).optional(),
+  username: z.string().min(1, 'Username is required'),
+  password: z.string().min(1, 'Password is required'),
+});
+
+export type DovecotConfig = z.infer<typeof dovecotConfigSchema>;

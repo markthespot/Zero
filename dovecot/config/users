@@ -1,0 +1,13 @@
+# Dovecot users file for development
+# Format: username:password:uid:gid:gecos:home:shell
+# For development, we'll use simple plaintext passwords
+
+# Test users for development
+testuser@localhost:testpass:1000:1000:Test User:/var/mail/testuser@localhost:/bin/false
+alice@localhost:alicepass:1000:1000:Alice Smith:/var/mail/alice@localhost:/bin/false
+bob@localhost:bobpass:1000:1000:Bob Johnson:/var/mail/bob@localhost:/bin/false
+demo@localhost:demopass:1000:1000:Demo User:/var/mail/demo@localhost:/bin/false
+
+# Additional test accounts
+user1@localhost:password1:1000:1000:User One:/var/mail/user1@localhost:/bin/false
+user2@localhost:password2:1000:1000:User Two:/var/mail/user2@localhost:/bin/false
